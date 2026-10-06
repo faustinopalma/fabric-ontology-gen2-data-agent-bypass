@@ -1,0 +1,14 @@
+.azure/
+.local/
+.env
+.env.*
+!.env.example
+.auth_record.json
+.venv/
+__pycache__/
+*.pyc
+node_modules/
+*.log
+*.har
+*.trace.zip
+TestResults/

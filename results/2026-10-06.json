@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-06",
+  "scope": "Published Gen2 context-snapshot bypass: configuration, source-data sensitivity and restoration",
+  "status": "Passed",
+  "mode": "Lakehouse-backed Data Agent with exported Gen2 TMDL instructions; no native ontology attachment",
+  "configuration": {
+    "ontologyGeneration": 2,
+    "publishedAgentInstructionsMatchFreshOntologyExport": true,
+    "publishedSourceInstructionsMatchFreshOntologyExport": true,
+    "publishedSourceCount": 1,
+    "publishedSourceType": "Lakehouse",
+    "selectedTables": ["Machines", "Anomalies"],
+    "nativeOntologyAttached": false,
+    "beforeContextSha256": "a68e6622c12023306faa26d13ee35638c1ba63102d9792e462099b8a6badeb69",
+    "afterContextSha256": "a68e6622c12023306faa26d13ee35638c1ba63102d9792e462099b8a6badeb69",
+    "contextChangedDuringExperiment": false,
+    "agentRepublishedDuringExperiment": false,
+    "fixtureRowIdentifiersPresentInContext": false,
+    "expectedAnswersSentToAgent": false
+  },
+  "sourceValidation": {
+    "engine": "Spark SQL through Fabric notebooks",
+    "machineCount": 5,
+    "anomalyCount": 6,
+    "completeRowPreconditions": "Both directions of EXCEPT ALL against the exact expected rows of both tables",
+    "assertionsPerNotebook": 6,
+    "phases": [
+      {"phase": "Baseline", "jobStatus": "Completed", "expectedDowntime": 55},
+      {"phase": "Mutate", "jobStatus": "Completed", "expectedDowntime": 92},
+      {"phase": "Restore", "jobStatus": "Completed", "expectedDowntime": 55}
+    ],
+    "mutation": {"anomalyId": "A01", "column": "DowntimeMinutes", "original": 10, "testValue": 47, "restored": 10},
+    "originalFixtureRestored": true
+  },
+  "mainAnswerCampaign": {
+    "phaseCount": 3,
+    "questionCountPerPhase": 4,
+    "answersMatchingPhaseOracle": 12,
+    "unchangedAnswers": {"Q01": ["M01", "M03"], "Q02": 3, "Q03": ["M05"]},
+    "downtimeAnswers": [55, 92, 55],
+    "baselineSuitePassed": true,
+    "restoredSuitePassed": true
+  },
+  "supplementalChangedDataConfirmation": {"questionCount": 4, "answersMatchingPhaseOracle": 4, "downtime": 92},
+  "negativeControl": {
+    "method": "Keep the original 55-minute oracle while actual source downtime is 92",
+    "agentResponse": 92,
+    "otherThreeAnswersPassed": true,
+    "staleOracleRejected": true,
+    "nonzeroChildExitVerified": true,
+    "recordedErrorType": "AssertionError",
+    "serviceFailure": false
+  },
+  "offlineTests": {"preflightAssertions": 24, "apiDefinitionAndFreshnessAssertions": 74, "pythonUnitTests": 4},
+  "activityTiming": {"limitSeconds": 1200, "progressIntervalSeconds": 120},
+  "limitations": {
+    "nativeGen2IntegrationFixed": false,
+    "nativeIntegrationRetestedInThisCampaign": false,
+    "agentGeneratedSqlExecutionTracesCaptured": false,
+    "automaticOntologyContextRefreshImplemented": false,
+    "productionScaleOrGovernanceParityEstablished": false,
+    "sourceVisibilityLatencyGuaranteeEstablished": false
+  },
+  "capacity": {"suspensionRequested": true, "finalState": "Paused", "provisioningState": "Succeeded", "verifiedByFreshArmRead": true}
+}

@@ -1,0 +1,9 @@
+{
+  "businessRule": "An anomaly is actionable exactly when Severity = 'critical' AND Status = 'open'. Downtime is measured in minutes. Machines.MachineId joins to Anomalies.MachineId.",
+  "questions": [
+    {"id": "Q01", "question": "List the distinct machine IDs with actionable anomalies.", "expected": ["M01", "M03"]},
+    {"id": "Q02", "question": "How many actionable anomalies are there?", "expected": 3},
+    {"id": "Q03", "question": "List the machine IDs with no anomalies of any severity or status.", "expected": ["M05"]},
+    {"id": "Q04", "question": "What is the total downtime in minutes for open critical anomalies?", "expected": 55}
+  ]
+}
